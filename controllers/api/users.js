@@ -1,5 +1,6 @@
 const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt")
 
 module.exports = {
   create,
@@ -33,7 +34,12 @@ async function login(req, res) {
   console.log(req.body)
   try {
     const user = await User.findOne({email: req.body.email})
-    console.log(user.name)
+    if (!user) throw new Error("No matching user")
+
+    const match = await bcrypt.compare(req.body.password, user.password)
+
+    if (!match) throw Error("wrong password")
+
     const token = createJWT(user);
     res.status(200).json(token)
   } catch (err) {
