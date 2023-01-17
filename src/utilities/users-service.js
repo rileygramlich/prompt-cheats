@@ -7,7 +7,15 @@ export async function signUp(userData) {
   const token = await usersAPI.signUp(userData);
   localStorage.setItem('token', token);
   // Baby step by returning whatever is sent back by the server
-  return token;
+  return getUser();
+}
+
+export async function login(credentials) {
+  console.log(credentials)
+  const token = await usersAPI.login(credentials)
+  localStorage.setItem('token', token)
+  console.log(token)
+  return getUser()
 }
 
 export function getToken() {
@@ -29,4 +37,8 @@ export function getUser() {
   const token = getToken();
   // If there's a token, return the user in the payload, otherwise return null
   return token ? JSON.parse(atob(token.split('.')[1])).user : null;
+}
+
+export function logout() {
+  localStorage.removeItem('token');
 }

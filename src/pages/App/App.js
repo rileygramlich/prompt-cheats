@@ -11,14 +11,14 @@ import Number from "../../components/Number/Number";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
-  const name = user.name
+
 
   return (
     <main className="App">
       <h1 className="hello">React is amazing.</h1>
       {user ? (
         <>
-          <NavBar name={name}/>
+          <NavBar user={user} setUser={setUser}/>
           <Routes>
             <Route path="/home/new" element={<Home />} />
             <Route path="/home/orders" element={<OrderHistoryPage />} />
@@ -26,7 +26,7 @@ export default function App() {
           </Routes>
         </>
       ) : (
-        <AuthPage />
+        <AuthPage setUser={setUser}/>
       )}
     </main>
   );
