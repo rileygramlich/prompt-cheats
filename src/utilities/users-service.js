@@ -1,5 +1,6 @@
 // users-service.js
 import * as usersAPI from './users-api';
+import {sendRequest} from './send-request'
 
 export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module
@@ -41,4 +42,12 @@ export function getUser() {
 
 export function logout() {
   localStorage.removeItem('token');
+}
+
+export function checkToken() {
+  // Just so that you don't forget how to use .then
+  return usersAPI.checkToken()
+    // checkToken returns a string, but let's 
+    // make it a Date object for more flexibility
+    .then(dateStr => new Date(dateStr));
 }

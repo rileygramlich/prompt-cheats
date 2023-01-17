@@ -1,3 +1,4 @@
+import { sendRequest } from './send-request';
 const BASE_URL = '/api/users';
 
 export async function signUp(userData) {
@@ -36,4 +37,8 @@ export async function login(credentials) {
   } else {
     throw new Error('Invalid Login');
   }
+}
+
+export function checkToken() {
+  return sendRequest(BASE_URL + '/check-token')
 }
