@@ -5,7 +5,7 @@ import { getUser } from '../../utilities/users-service';
 
 import Home from "../Home/Home";
 import AuthPage from "../AuthPage/AuthPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import Profile from "../Profile/Profile";
 import NavBar from "../../components/NavBar/NavBar";
 import Number from "../../components/Number/Number";
 
@@ -20,8 +20,8 @@ export default function App() {
         <>
           <NavBar user={user} setUser={setUser}/>
           <Routes>
-            <Route path="/home/new" element={<Home />} />
-            <Route path="/home/orders" element={<OrderHistoryPage />} />
+            <Route path="/home/" element={<Home />} />
+            <Route path="/home/profile" element={<Profile />} />
             <Route path="/:num" element={<Number />} />
           </Routes>
         </>
